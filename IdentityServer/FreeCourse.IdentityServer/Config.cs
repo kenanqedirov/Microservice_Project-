@@ -14,7 +14,8 @@ namespace FreeCourse.IdentityServer
         public static IEnumerable<ApiResource> ApiResources => new ApiResource[]                    // Audience icine yazdiririq -> ApiResource ile 
         { // Bunu StartUp faylinda qeydiyyatdan kecirt AddInMemoryApiResource(Config.ApiResource)
             new ApiResource("resource_catalog"){Scopes={"catalog_fullpermission"}},                 // catalog_fullpermission --> Audience icine yazir
-            new ApiResource("photo_stock_catalog"){Scopes={"photo_stock_fullpermission"}},          // photo_stock_fullpermission  --> Audience icine yazir
+            new ApiResource("resource_photo_stock"){Scopes={"photo_stock_fullpermission"}},          // photo_stock_fullpermission  --> Audience icine yazir
+            new ApiResource("resource_basket"){Scopes={"basket_fullpermission"}},          // photo_stock_fullpermission  --> Audience icine yazir
             new ApiResource(IdentityServerConstants.LocalApi.ScopeName)                             // Identity Server ozune icaze verir 
         };
 
@@ -33,6 +34,7 @@ namespace FreeCourse.IdentityServer
             {
                 new ApiScope("catalog_fullpermission","Catalog Api for full permission"),                  // catalog_fullpermission -a icaze verir 
                 new ApiScope("photo_stock_fullpermission","Photo Stock for Api full permission"),          // photo_stock_fullpermission - a icaze verir
+                new ApiScope("basket_fullpermission","Basket for Api full permission"),          // photo_stock_fullpermission - a icaze verir
                 new ApiScope(IdentityServerConstants.LocalApi.ScopeName)                                   // IdentityServer ozune icaze verir 
             };
 
@@ -54,7 +56,7 @@ namespace FreeCourse.IdentityServer
                    AllowOfflineAccess = true,
                    ClientSecrets = {new Secret ("secret".Sha256())},
                    AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
-                   AllowedScopes={IdentityServerConstants.StandardScopes.Email,IdentityServerConstants.StandardScopes.OpenId
+                   AllowedScopes={"basket_fullpermission",IdentityServerConstants.StandardScopes.Email,IdentityServerConstants.StandardScopes.OpenId
                    ,IdentityServerConstants.StandardScopes.Profile , IdentityServerConstants.StandardScopes.OfflineAccess, IdentityServerConstants.LocalApi.ScopeName ,"roles"},
                     AccessTokenLifetime= 3600, // second
                     RefreshTokenExpiration = TokenExpiration.Absolute,  //Deqiq tarix vermek ucun yaziriq

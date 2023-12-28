@@ -1,4 +1,5 @@
 Services
 	Services Catalog Api -> 5011
 	PhotoStock Api --> 5012
+	Basket Api --> 5013
 Identity Server --> 5001
