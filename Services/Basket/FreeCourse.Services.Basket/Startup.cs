@@ -16,6 +16,7 @@ using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -34,7 +35,7 @@ namespace FreeCourse.Services.Basket
         public void ConfigureServices(IServiceCollection services)
         {
             var requireAuthorizePolicy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();    // 60 setrde elave edirik Filterse
-
+            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Remove("sub");
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>           
             {                                                                                                     
                 options.Authority = Configuration["IdentityServerURL"];                                          //

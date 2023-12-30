@@ -22,7 +22,7 @@ namespace FreeCourse.IdentityServer
         public static IEnumerable<IdentityResource> IdentityResources =>   // Icazeler --> Userin hansi melumatlarina icaze veririk WebApiler baxa bilsin onu yaziriq
                    new IdentityResource[]
                    {
-                       new IdentityResources.Email(),                                       
+                       new IdentityResources.Email(),
                        new IdentityResources.OpenId(),
                        new IdentityResources.Profile(),
                        new IdentityResource(){Name = "roles" ,DisplayName ="Roles" ,

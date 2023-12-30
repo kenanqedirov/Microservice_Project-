@@ -31,6 +31,7 @@ namespace FreeCourse.Services.Basket.Controllers
             var response = await _basketService.SaveOrUpdate(basketDto);
             return CreateActionResultInstance(response);
         }
+        [HttpDelete]
         public async Task<IActionResult> DeleteBasket()
         {
             return CreateActionResultInstance(await _basketService.Delete(_sharedIdentityService.GetUserId));
