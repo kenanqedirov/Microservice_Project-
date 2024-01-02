@@ -7,3 +7,5 @@ Services
 	FakePayment Api --> 5016
 
 Identity Server --> 5001
+	Gateways Api --> 5000
+	Web --> 5010

@@ -19,6 +19,7 @@ namespace FreeCourse.IdentityServer
             new ApiResource("resource_discount"){Scopes={"discount_fullpermission"}},          // photo_stock_fullpermission  --> Audience icine yazir
             new ApiResource("resource_order"){Scopes={"order_fullpermission"}},          // photo_stock_fullpermission  --> Audience icine yazir
             new ApiResource("resource_payment"){Scopes={"payment_fullpermission"}},          // photo_stock_fullpermission  --> Audience icine yazir
+            new ApiResource("resource_gateway"){Scopes={"gateway_fullpermission"}},          // photo_stock_fullpermission  --> Audience icine yazir
             new ApiResource(IdentityServerConstants.LocalApi.ScopeName)                             // Identity Server ozune icaze verir 
         };
 
@@ -41,6 +42,7 @@ namespace FreeCourse.IdentityServer
                 new ApiScope("discount_fullpermission","Discount for Api full permission"),          // photo_stock_fullpermission - a icaze verir
                 new ApiScope("order_fullpermission","Order for Api full permission"),          // photo_stock_fullpermission - a icaze verir
                 new ApiScope("payment_fullpermission","FakePayment for Api full permission"),          // photo_stock_fullpermission - a icaze verir
+                new ApiScope("gateway_fullpermission","gateway for Api full permission"),          // photo_stock_fullpermission - a icaze verir
                 new ApiScope(IdentityServerConstants.LocalApi.ScopeName)                                   // IdentityServer ozune icaze verir 
             };
 
@@ -53,7 +55,7 @@ namespace FreeCourse.IdentityServer
                    ClientId = "WebMvcClient",   // Ozumuz ID teyin edirik
                    ClientSecrets = {new Secret ("secret".Sha256())},    // Ozumuz sifre teyin edirik
                    AllowedGrantTypes = GrantTypes.ClientCredentials,    // Grant Type -> Yeni tipi de ClientCredentials olmalidir bu tipli token ucun
-                   AllowedScopes={ "catalog_fullpermission", "photo_stock_fullpermission", IdentityServerConstants.LocalApi.ScopeName }  // Client kime icaze verecek 
+                   AllowedScopes={ "catalog_fullpermission", "photo_stock_fullpermission", "gateway_fullpermission", IdentityServerConstants.LocalApi.ScopeName }  // Client kime icaze verecek 
                 },
                  new Client
                 {
@@ -62,8 +64,10 @@ namespace FreeCourse.IdentityServer
                    AllowOfflineAccess = true,
                    ClientSecrets = {new Secret ("secret".Sha256())},
                    AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
-                   AllowedScopes={"basket_fullpermission","discount_fullpermission","order_fullpermission","payment_fullpermission",IdentityServerConstants.StandardScopes.Email,IdentityServerConstants.StandardScopes.OpenId
-                   ,IdentityServerConstants.StandardScopes.Profile , IdentityServerConstants.StandardScopes.OfflineAccess, IdentityServerConstants.LocalApi.ScopeName ,"roles"},
+                   AllowedScopes={"basket_fullpermission","discount_fullpermission","order_fullpermission","payment_fullpermission",
+                   "gateway_fullpermission",IdentityServerConstants.StandardScopes.Email,IdentityServerConstants.StandardScopes.OpenId
+                   ,IdentityServerConstants.StandardScopes.Profile , IdentityServerConstants.StandardScopes.OfflineAccess,
+                         IdentityServerConstants.LocalApi.ScopeName ,"roles"},
                     AccessTokenLifetime= 3600, // second
                     RefreshTokenExpiration = TokenExpiration.Absolute,  //Deqiq tarix vermek ucun yaziriq
                      AbsoluteRefreshTokenLifetime = (int)(DateTime.Now.AddDays(60)-DateTime.Now).TotalSeconds,
