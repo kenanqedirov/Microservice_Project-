@@ -1,0 +1,45 @@
+﻿@model FreeCourse.Web.Models.SigninInput
+
+@{
+    ViewData["Title"] = "SignIn";
+}
+<div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">Card title</h5>
+    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    <a href="#" class="card-link">Card link</a>
+    <a href="#" class="card-link">Another link</a>
+  </div>
+</div>
+<div class="row">
+    <div class="col-md-4 offset-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Sign In Page</h5>
+                <div class="text-danger" asp-validation-summary="ModelOnly">
+
+                </div>
+                <form method="post" asp-controller="Auth" asp-action="SignIn" >
+                    <div class="mb-3">
+                        <label asp-for="Email" for="exampleInputEmail1" class="form-label">Email address</label>
+                        <input type="email" asp-for="Email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Password" for="exampleInputPassword1" class="form-label">Password</label>
+                        <input asp-for="Password" type="password" class="form-control" id="exampleInputPassword1">
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3 form-check">
+                        <input asp-for="IsRememberred" type="checkbox" class="form-check-input" id="exampleCheck1">
+                        <label asp-for="IsRememberred" class="form-check-label" for="exampleCheck1">Remember me</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
