@@ -1,0 +1,53 @@
+﻿@model CourseUpdateInput
+@{
+    ViewData["Title"] = "Update";
+}
+
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Update Course</h5>
+                <form method="post" asp-controller="Course" asp-action="Update" enctype="multipart/form-data">
+                    <div asp-validation-summary="ModelOnly"> </div>
+                    <input type="hidden" asp-for="Id"/>
+                    <input type="hidden" asp-for="UserId"/>
+                    <input type="hidden" asp-for="Picture"/>
+                    <div class="mb-3">
+                        <label asp-for="CategoryId" class="form-label">Category Id</label>
+                        <select asp-for="CategoryId" class="form-control" asp-items="@ViewBag.Categories">
+                        </select>
+                        <span class="text-danger" asp-validation-for="CategoryId"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Name" class="form-label">Course Name</label>
+                        <input asp-for="Name" class="form-control">
+                        <span asp-validation-for="Name"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Price" class="form-label">Course Price</label>
+                        <input asp-for="Price" class="form-control">
+                        <span asp-validation-for="Price"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Description" class="form-label">Description</label>
+                        <textarea asp-for="Description" class="form-control"></textarea>
+                        <span asp-validation-for="Description"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Feature.Duration" class="form-label">Duration</label>
+                        <input asp-for="Feature.Duration" class="form-control">
+                        <span asp-validation-for="Feature.Duration"></span>
+                    </div>
+
+                    <button class="btn btn-primary">Update</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
