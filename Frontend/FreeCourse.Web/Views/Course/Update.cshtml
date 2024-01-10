@@ -43,7 +43,10 @@
                         <input asp-for="Feature.Duration" class="form-control">
                         <span asp-validation-for="Feature.Duration"></span>
                     </div>
-
+                    <div class="mb-3">
+                        <label asp-for="PhotoFormFile" class="form-label">Course Photo</label>
+                        <input type="file" asp-for="PhotoFormFile" class="form-control">
+                    </div>
                     <button class="btn btn-primary">Update</button>
                 </form>
             </div>
