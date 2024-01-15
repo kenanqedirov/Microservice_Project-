@@ -23,18 +23,37 @@
                             <td><a class="btn btn-outline-danger" asp-controller="basket" asp-action="RemoveBasketItem" asp-route-courseId="@item.CourseId">Delete</a></td>
                         </tr>
                     }
-                    @if (Model.HasDiscount)
-                    {
+
+                        @if (Model.HasDiscount)
+                        {
                         <tr>
                             <td>discount rate</td>
                             <th colspan="2">%@Model.DiscountRate.Value</th>
                         </tr>
-                        <tr>
-                            <td>(@Model.HasDiscount ? "Discount price" : "Total price")</td>
-                            <th colspan="2">@Model.TotalPrice $</th>
-                        </tr>
-                    }
+                        }
+                    <tr>
+                       @{ <td>(@Model.HasDiscount ? "Discount price" : "Total price")</td>}
+                        <th colspan="2">@Model.TotalPrice $</th>
+                    </tr>
                 </table>
+                <form asp-controller="basket" asp-action="ApplyDiscount">
+                    @if (Model.HasDiscount)
+                    {
+                        <div class="alert alert-success">
+                            "@Model.DiscountCode" is applied
+                            <a asp-controller="basket" asp-action="CancelApplyDiscount">Cancel</a>
+                        </div>
+                    }
+                    @if (TempData["discountStatus"] is not null && (bool)TempData["discountStatus"] == false)
+                    {
+                        <div class="text-danger">Discount code is wrong</div>
+                    }
+                    <div class="input-group mb-3">
+                        <input type="text" name="DiscountApplyInput.Code" class="form-control" />
+                        <button type="submit" class="btn btn-outline-secondary">Apply</button>
+                        <div asp-validation-summary="All"></div>
+                    </div>
+                </form>
             }
             else
             {

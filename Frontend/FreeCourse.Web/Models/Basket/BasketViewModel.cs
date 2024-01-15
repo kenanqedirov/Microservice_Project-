@@ -33,7 +33,12 @@ namespace FreeCourse.Web.Models.Basket
         }
         public bool HasDiscount
         {
-            get=> !string.IsNullOrEmpty(DiscountCode);
+            get=> !string.IsNullOrEmpty(DiscountCode) && DiscountRate.HasValue;
+        }
+        public void CancelApplyDiscount()
+        {
+            DiscountCode = null;
+            DiscountRate = null;
         }
     }
 }

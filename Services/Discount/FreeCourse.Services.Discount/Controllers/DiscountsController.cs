@@ -24,19 +24,21 @@ namespace FreeCourse.Services.Discount.Controllers
         {
             return CreateActionResultInstance(await  _discountService.GetAll());
         }
+
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
             return CreateActionResultInstance(await _discountService.GetById(id));
         }
+
         [HttpGet]
         [Route("/api/[controller]/[action]/{code}")]
-       
         public async Task<IActionResult> GetByCode(string code)
         {
             var userId = _sharedIdentityService.GetUserId;
             return CreateActionResultInstance(await _discountService.GetByCodeAndUserId(code,userId));
         }
+
         [HttpPost]
         public async Task<IActionResult> Save(Models.Discount discount)
         {
