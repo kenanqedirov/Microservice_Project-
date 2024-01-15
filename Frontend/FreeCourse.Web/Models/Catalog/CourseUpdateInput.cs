@@ -6,19 +6,19 @@ namespace FreeCourse.Web.Models.Catalog
     public class CourseUpdateInput
     {
         public string Id { get; set; }
-        [Required]
+
         [Display(Name ="Course Name")]
         public string Name { get; set; }
         [Display(Name = "Course Description")]
-        [Required(ErrorMessage = "This field must not empty")]
+
         public string Description { get; set; }
         [Display(Name = "Course Price")]
-        [Required(ErrorMessage = "This field must not empty")]
+
         public decimal Price { get; set; }
         public string Picture { get; set; }
         public string UserId { get; set; }
         public FeatureViewModel Feature { get; set; }
-        [Required]
+
         [Display(Name = "Course Category")]
         public string CategoryId { get; set; }
         [Display(Name = "Course Photo")]
