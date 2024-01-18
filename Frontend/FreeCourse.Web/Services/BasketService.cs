@@ -41,7 +41,7 @@ namespace FreeCourse.Web.Services
         {
             await CancelApplyDiscount();
             var basket = await Get();
-            if(basket is null || basket.DiscountCode is null)
+            if(basket is null)
             {
                 return false;
             }
