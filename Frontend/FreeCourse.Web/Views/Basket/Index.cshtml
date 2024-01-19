@@ -32,7 +32,7 @@
                         </tr>
                         }
                     <tr>
-                       @{ <td>(@Model.HasDiscount ? "Discount price" : "Total price")</td>}
+                        <td>@(Model.HasDiscount ? "Discount price" : "Total price")</td>
                         <th colspan="2">@Model.TotalPrice $</th>
                     </tr>
                 </table>
@@ -54,6 +54,8 @@
                         <div asp-validation-summary="All"></div>
                     </div>
                 </form>
+                <a class="btn btn-success" asp-controller="Order" asp-action="Checkout">Payment info</a>
+                <a class="btn btn-warning" asp-controller="Home" asp-action="Index">Home</a>
             }
             else
             {

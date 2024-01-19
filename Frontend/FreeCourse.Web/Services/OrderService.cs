@@ -34,7 +34,7 @@ namespace FreeCourse.Web.Services
                 CardNumber = checkoutInfoInput.CardNumber,
                 CVV = checkoutInfoInput.CVV,
                 Expiration = checkoutInfoInput.Expiration,
-                ToralPrice = basket.TotalPrice
+                TotalPrice = basket.TotalPrice
             };
             var responsePayment = await _paymentService.ReceivePayment(paymentInfoInput);
             if (!responsePayment)
@@ -51,19 +51,22 @@ namespace FreeCourse.Web.Services
                     Line = checkoutInfoInput.Line,
                     Street = checkoutInfoInput.Street,
                     ZipCode = checkoutInfoInput.ZipCode
-                },        
+                },
             };
             basket.BasketItems.ForEach(a =>
             {
-                var orderItem = new OrderItemCreateInput { ProductId = a.CourseId, Price = a.Price, PictureUrl = "", ProductName = a.CourseName };
+                var orderItem = new OrderItemCreateInput { ProductId = a.CourseId, Price = a.GetCurrentPrice, PictureUrl = "", ProductName = a.CourseName };
                 orderCreateInput.OrderItems.Add(orderItem);
             });
             var response = await _httpClient.PostAsJsonAsync<OrderCreateInput>("orders", orderCreateInput);
-            if(!response.IsSuccessStatusCode)
+            if (!response.IsSuccessStatusCode)
             {
                 return new OrderCreatedViewModel() { Error = "Payment dont finished successfully", isSuccessfull = false };
             }
-            return await response.Content.ReadFromJsonAsync<OrderCreatedViewModel>();
+            var orderCreatedViewModel = await response.Content.ReadFromJsonAsync<Response<OrderCreatedViewModel>>();
+            orderCreatedViewModel.Data.isSuccessfull = true;
+            await _basketService.Delete();
+            return orderCreatedViewModel.Data;
         }
         public async Task<List<OrderViewModel>> GetOrder()
         {
