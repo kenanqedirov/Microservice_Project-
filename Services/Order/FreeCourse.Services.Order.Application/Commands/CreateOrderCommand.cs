@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace FreeCourse.Services.Order.Application.Commands
 {
-    public class CreateOrderCommand : IRequest<Response<CreatedOrderDto>>
+    public class CreateOrderMEssageCommand : IRequest<Response<CreatedOrderDto>>
     {
         public string BuyerId { get; set; }
         public List<OrderItemDto> OrderItems { get; set; }

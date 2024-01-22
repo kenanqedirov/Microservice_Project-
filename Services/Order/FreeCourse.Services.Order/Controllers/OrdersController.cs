@@ -29,7 +29,7 @@ namespace FreeCourse.Services.Order.Controllers
             return CreateActionResultInstance(response);
         }
         [HttpPost]
-        public async Task<IActionResult> SaveOrder(CreateOrderCommand createOrderCommand)
+        public async Task<IActionResult> SaveOrder(CreateOrderMEssageCommand createOrderCommand)
         {
             var resource = await _mediator.Send(createOrderCommand);
             return CreateActionResultInstance(resource);

@@ -74,9 +74,43 @@ namespace FreeCourse.Web.Services
             return response.Data;
         }
 
-        public Task SuspendOrder(CheckoutInfoInput checkoutInfoInput)
+        public async Task<OrderSuspendViewModel> SuspendOrder(CheckoutInfoInput checkoutInfoInput)
         {
-            throw new System.NotImplementedException();
+            var orderCreateInput = new OrderCreateInput()
+            {
+                BuyerId = _sharedIdentityService.GetUserId,
+                Address = new AddressCreateInput
+                {
+                    Province = checkoutInfoInput.Province,
+                    District = checkoutInfoInput.District,
+                    Line = checkoutInfoInput.Line,
+                    Street = checkoutInfoInput.Street,
+                    ZipCode = checkoutInfoInput.ZipCode
+                },
+            };
+            var basket = await _basketService.Get();
+            basket.BasketItems.ForEach(a =>
+            {
+                var orderItem = new OrderItemCreateInput { ProductId = a.CourseId, Price = a.GetCurrentPrice, PictureUrl = "", ProductName = a.CourseName };
+                orderCreateInput.OrderItems.Add(orderItem);
+            });
+
+            var paymentInfoInput = new PaymentInfoInput()
+            {
+                CardName = checkoutInfoInput.CardName,
+                CardNumber = checkoutInfoInput.CardNumber,
+                CVV = checkoutInfoInput.CVV,
+                Expiration = checkoutInfoInput.Expiration,
+                TotalPrice = basket.TotalPrice,
+                Order = orderCreateInput
+            };
+            var responsePayment = await _paymentService.ReceivePayment(paymentInfoInput);
+            if (!responsePayment)
+            {
+                return new OrderSuspendViewModel() { Error = "Payment dont finished successfully", isSuccessfull = false };
+            }
+            await _basketService.Delete();
+            return new OrderSuspendViewModel() { isSuccessfull = true };
         }
     }
 }
