@@ -20,7 +20,7 @@ namespace FreeCourse.Services.FakePayment.Controllers
         {
             _sendEndpointProvider = sendEndpointProvider;
         }
-
+         
         [HttpPost]
         public  async Task<IActionResult> ReceivePayment(PaymentDto paymentDto)
         {
